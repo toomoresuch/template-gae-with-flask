@@ -1,9 +1,48 @@
-application: flasktodo
+application: # set your application-id.
 version: 1
 runtime: python
 api_version: 1
 
 handlers:
+- url: /favicon.ico
+  static_files: static/images/favicon.ico
+  upload: static/images/favicon.ico
+
+- url: /javascripts
+  static_dir: static/javascripts
+
+- url: /jsons
+  static_dir: static/jsons
+
+- url: /stylesheets
+  static_dir: static/stylesheets
+
+- url: /stats.*
+  script: $PYTHON_LIB/google/appengine/ext/appstats/ui.py
+  login: admin
+
+- url: /remote_api
+  script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
+  login: admin
+
 - url: /.*
-  script: app.cgi
+  script: app.py
   login: required
+  secure: always
+
+skip_files: |
+ ^(.*/)?(
+ (#.*#)|
+ (.*/RCS/.*)|
+ (.*\.po[t]*)|
+ (.*\.py[co])|
+ (.*~)|
+ (\..*)|
+ (app\.ya*ml)|
+ (dev_appserver.datastore)|
+ (flask_tests.py)|
+ (index\.ya*ml)|
+ (static/javascripts/goog/.*)|
+ (tmp/.*)|
+ (utils/tests.*\.py)|
+ )$
