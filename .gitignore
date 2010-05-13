@@ -1,1 +1,13 @@
+## Directories. ##
+tmp/*
+
+## Any Files fixed extension. ##
 *.pyc
+
+## Symblic Files. ##
+jinja2
+werkzeug
+
+## Specifed Files. ##
+index.yaml
+dev_appserver.datastore
